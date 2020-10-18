@@ -1,0 +1,10 @@
+name: 'Setup Build'
+description: 'Installs the Bicep CLI'
+author: 'Anthony Martin'
+inputs:
+  version:
+    required: false
+    description: 'The version of Bicep to use (defaults to latest)'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
