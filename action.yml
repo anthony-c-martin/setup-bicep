@@ -1,6 +1,9 @@
-name: 'Setup Build'
+name: 'Setup Bicep'
 description: 'Installs the Bicep CLI'
 author: 'Anthony Martin'
+branding:
+  icon: hexagon
+  color: yellow
 inputs:
   version:
     required: false
