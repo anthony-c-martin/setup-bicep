@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Bicep
-        uses: anthony-c-martin/setup-bicep@main
+        uses: anthony-c-martin/setup-bicep@v1
 
       - name: Build Bicep
         run: bicep build ./path/to/main.bicep
@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Bicep
-        uses: anthony-c-martin/setup-bicep@main
+        uses: anthony-c-martin/setup-bicep@v1
 
       - name: Azure CLI Login
         uses: azure/login@v1
@@ -56,4 +56,26 @@ jobs:
           template: ./path/to/main.json
           # path to your checked-in parameters file to deploy
           parameters: ./path/to/parameters.json
+```
+
+### Use a specific version of bicep:
+```yml
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Setup Bicep
+        uses: anthony-c-martin/setup-bicep@v1
+        with:
+          # must be a version listed under https://github.com/Azure/bicep/releases
+          version: v0.2.212
+
+      - name: Build Bicep
+        run: bicep build ./path/to/main.bicep
 ```
