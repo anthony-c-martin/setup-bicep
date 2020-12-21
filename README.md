@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Bicep
-        uses: anthony-c-martin/setup-bicep@v1
+        uses: anthony-c-martin/setup-bicep@v0.1
 
       - name: Build Bicep
         run: bicep build ./path/to/main.bicep
@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Bicep
-        uses: anthony-c-martin/setup-bicep@v1
+        uses: anthony-c-martin/setup-bicep@v0.1
 
       - name: Azure CLI Login
         uses: azure/login@v1
@@ -71,7 +71,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Bicep
-        uses: anthony-c-martin/setup-bicep@v1
+        uses: anthony-c-martin/setup-bicep@v0.1
         with:
           # must be a version listed under https://github.com/Azure/bicep/releases
           version: v0.2.212
