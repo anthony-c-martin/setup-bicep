@@ -2,7 +2,7 @@ name: 'Setup Bicep'
 description: 'Installs the Bicep CLI'
 author: 'Anthony Martin'
 branding:
-  icon: hexagon
+  icon: box
   color: yellow
 inputs:
   version:
