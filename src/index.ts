@@ -52,7 +52,7 @@ async function main() {
     core.info(`Installed bicep to ${bicePath}`);
   } catch (e) {
     issueCommand('remove-matcher', {owner: 'bicep'}, '');
-    core.setFailed(e);
+    core.setFailed(`${e}`);
   }
 }
 
