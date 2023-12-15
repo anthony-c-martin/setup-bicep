@@ -5,39 +5,24 @@ import * as exec from '@actions/exec';
 import * as core from '@actions/core';
 import * as tc from '@actions/tool-cache';
 import { issueCommand } from '@actions/core/lib/command';
-
-function getDownloadUrl(osPlat: string, osArch: string, version: string): string {
-  let basePath;
-  if (version) {
-    basePath = `https://github.com/Azure/bicep/releases/download/${version}`;
-  } else {
-    basePath = `https://github.com/Azure/bicep/releases/latest/download`;
-  }
-
-  switch (`${osPlat}_${osArch}`) {
-    case 'win32_x64': return `${basePath}/bicep-win-x64.exe`;
-    case 'linux_x64': return `${basePath}/bicep-linux-x64`;
-    case 'darwin_x64': return `${basePath}/bicep-osx-x64`;
-    default: throw `Bicep CLI is not available for platform ${osPlat} and architecture ${osArch}`;
-  }
-}
+import { Bicep } from 'bicep-node';
 
 async function main() {
   try {
     issueCommand('add-matcher', {} , path.join(__dirname, 'bicep-problem-matcher.json'));
 
-    const osPlat: string = os.platform();
-    const osArch: string = os.arch();
-    const version = core.getInput('version');
+    const platform: string = os.platform();
+    const arch: string = os.arch();
+    const version = core.getInput('version') || undefined;
 
-    const downloadUrl = getDownloadUrl(osPlat, osArch, version);
+    const downloadUrl = await Bicep.getDownloadUrl(version, platform, arch);
 
     core.info(`Downloading bicep from '${downloadUrl}'`);
     const downloadFile = await tc.downloadTool(downloadUrl);
     core.info(`Downloaded bicep to ${downloadFile}`);
 
-    const targetFile = osPlat === 'win32' ? 'bicep.exe' : 'bicep';
-    const toolPath = await tc.cacheFile(downloadFile, targetFile, 'bicep', version, osArch);
+    const targetFile = platform === 'win32' ? 'bicep.exe' : 'bicep';
+    const toolPath = await tc.cacheFile(downloadFile, targetFile, 'bicep', version || 'latest', arch);
     const bicePath = path.join(toolPath, targetFile);
 
     // make bicep executable
