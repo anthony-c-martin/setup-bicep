@@ -23,10 +23,10 @@ async function main() {
 
     const targetFile = platform === 'win32' ? 'bicep.exe' : 'bicep';
     const toolPath = await tc.cacheFile(downloadFile, targetFile, 'bicep', version || 'latest', arch);
-    const bicePath = path.join(toolPath, targetFile);
+    const bicepPath = path.join(toolPath, targetFile);
 
     // make bicep executable
-    await fs.promises.chmod(bicePath, 0o755);
+    await fs.promises.chmod(bicepPath, 0o755);
 
     // add bicep to PATH
     core.addPath(toolPath);
@@ -34,7 +34,7 @@ async function main() {
     // print bicep version info
     await exec.exec('bicep', ['--version']);
 
-    core.info(`Installed bicep to ${bicePath}`);
+    core.info(`Installed bicep to ${bicepPath}`);
   } catch (e) {
     issueCommand('remove-matcher', {owner: 'bicep'}, '');
     core.setFailed(`${e}`);
