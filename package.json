@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/anthony-c-martin/setup-bicep#readme",
   "devDependencies": {
-    "@types/node": "^22.15.17",
+    "@types/node": "^22.15.18",
     "@vercel/ncc": "^0.38.3",
     "typescript": "^5.8.3"
   },
