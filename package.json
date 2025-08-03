@@ -29,6 +29,6 @@
     "@actions/core": "^1.11.1",
     "@actions/exec": "^1.1.1",
     "@actions/tool-cache": "^2.0.2",
-    "bicep-node": "^0.0.8"
+    "bicep-node": "^0.0.9"
   }
 }
