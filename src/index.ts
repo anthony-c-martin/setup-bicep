@@ -1,15 +1,14 @@
 import os from 'os';
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 import * as exec from '@actions/exec';
 import * as core from '@actions/core';
 import * as tc from '@actions/tool-cache';
-import { issueCommand } from '@actions/core/lib/command';
-import { Bicep } from 'bicep-node';
+import { Bicep } from '@azure/bicep-rpc-client';
 
 async function main() {
   try {
-    issueCommand('add-matcher', {} , path.join(__dirname, 'bicep-problem-matcher.json'));
+    core.info(`::add-matcher::${path.join(__dirname, 'bicep-problem-matcher.json')}`);
 
     const platform: string = os.platform();
     const arch: string = os.arch();
@@ -26,7 +25,7 @@ async function main() {
     const bicepPath = path.join(toolPath, targetFile);
 
     // make bicep executable
-    await fs.promises.chmod(bicepPath, 0o755);
+    await fs.chmod(bicepPath, 0o755);
 
     // add bicep to PATH
     core.addPath(toolPath);
@@ -36,7 +35,6 @@ async function main() {
 
     core.info(`Installed bicep to ${bicepPath}`);
   } catch (e) {
-    issueCommand('remove-matcher', {owner: 'bicep'}, '');
     core.setFailed(`${e}`);
   }
 }

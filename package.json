@@ -2,10 +2,14 @@
   "name": "setup-bicep",
   "version": "0.0.3",
   "description": "Installs the Bicep CLI",
-  "main": "lib/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.cjs",
+  "exports": {
+    ".": "./dist/index.cjs"
+  },
   "scripts": {
-    "build": "tsc",
-    "package": "ncc build --license licenses.txt"
+    "typecheck": "tsc --noEmit",
+    "build": "npm run typecheck && tsdown --config ./tsdown.config.ts"
   },
   "repository": {
     "type": "git",
@@ -20,15 +24,16 @@
     "url": "https://github.com/anthony-c-martin/setup-bicep/issues"
   },
   "homepage": "https://github.com/anthony-c-martin/setup-bicep#readme",
-  "devDependencies": {
-    "@types/node": "^25.9.2",
-    "@vercel/ncc": "^0.38.4",
-    "typescript": "^6.0.3"
-  },
   "dependencies": {
     "@actions/core": "^3.0.1",
     "@actions/exec": "^3.0.0",
     "@actions/tool-cache": "^4.0.0",
-    "bicep-node": "^0.0.12"
+    "@azure/bicep-rpc-client": "^0.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "esbuild": "^0.28.0",
+    "tsdown": "^0.22.2",
+    "typescript": "^6.0.3"
   }
 }
