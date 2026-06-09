@@ -15,6 +15,7 @@
     "esModuleInterop": true,
     "lib": ["es2020"],
     "newLine": "LF",
+    "rootDir": "src",
     "outDir": "dist"
   },
   "include": ["src"],
