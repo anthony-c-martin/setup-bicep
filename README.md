@@ -22,42 +22,6 @@ jobs:
         run: bicep build ./path/to/main.bicep
 ```
 
-### Deploy a .bicep file to an Azure subscription
-```yml
-on:
-  push:
-    branches: [ main ]
-jobs:
-  build-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v2
-
-      - name: Setup Bicep
-        uses: anthony-c-martin/setup-bicep@v0.1
-
-      - name: Azure CLI Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Build Bicep
-        # path to your checked-in .bicep file to deploy
-        run: bicep build ./path/to/main.bicep
-
-      - uses: azure/arm-deploy@v1
-        with:
-          # set to your subscriptionId
-          subscriptionId: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
-          # set to your resource group name
-          resourceGroupName: my-rg
-          # should match the .bicep file path but with .json extension
-          template: ./path/to/main.json
-          # path to your checked-in parameters file to deploy
-          parameters: ./path/to/parameters.json
-```
-
 ### Use a specific version of bicep:
 ```yml
 on:
