@@ -29,7 +29,7 @@ steps:
   - uses: actions/checkout@v4
   - uses: anthony-c-martin/setup-bicep@v1
     with:
-      version: v0.45.6
+      version: 0.45.6
   - run: bicep lint --pattern './infra/**/*.bicep'
 ```
 
