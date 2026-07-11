@@ -8,6 +8,9 @@ export default defineConfig({
   platform: 'node',
   target: 'es2021',
   format: ['cjs', 'esm'],
+  copy: [
+    { from: 'src/assets/*', to: 'dist' },
+  ],
   outputOptions: {
     inlineDynamicImports: true,
   },

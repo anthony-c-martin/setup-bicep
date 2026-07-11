@@ -1,6 +1,6 @@
 {
   "name": "setup-bicep",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Installs the Bicep CLI",
   "main": "./dist/index.cjs",
   "module": "./dist/index.cjs",
@@ -9,7 +9,7 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "build": "npm run typecheck && tsdown --config ./tsdown.config.ts"
+    "build": "npm run typecheck && tsdown --config ./tsdown.config.mts"
   },
   "repository": {
     "type": "git",

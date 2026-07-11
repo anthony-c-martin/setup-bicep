@@ -26,4 +26,12 @@ jobs:
         uses: ./
 
       - name: Verify Bicep
-        run: bicep --version
+        shell: bash
+        run: |
+          bicep --version
+          resolved="$(command -v bicep)"
+          echo "Resolved bicep to: $resolved"
+          if ! grep -Eqi 'hostedtoolcache.*/bicep/' <<< "$resolved"; then
+            echo "::error::bicep on PATH ('$resolved') is not the setup-bicep install; a pre-existing bicep is shadowing it."
+            exit 1
+          fi
