@@ -28,7 +28,7 @@
     "@actions/core": "^3.0.1",
     "@actions/exec": "^3.0.0",
     "@actions/tool-cache": "^4.0.0",
-    "@azure/bicep-rpc-client": "^0.2.1"
+    "@azure/bicep-rpc-client": "^0.4.1"
   },
   "devDependencies": {
     "@types/node": "^26.6.3",
